@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KotoAI - Мой личный Gemini</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        body { margin: 0; background: #131314; color: white; font-family: 'Segoe UI', Tahoma, sans-serif; display: flex; flex-direction: column; height: 100vh; }
+        header { padding: 20px; text-align: center; border-bottom: 1px solid #333; }
+        .ai-frame { flex-grow: 1; border: none; }
+        .status-bar { height: 5px; background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570); }
+    </style>
+</head>
+<body>
+    <div class="status-bar"></div>
+    <header>
+        <h2>KotoAI <small style="font-size: 12px; color: #888;">powered by Gemma 4</small></h2>
+    </header>
+
+    <iframe class="ai-frame" src="https://ТВОЙ_НИК-ИМЯ_СПЕЙСА.hf.space"></iframe>
+
+    <script>
+        // Регистрация Service Worker для PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
