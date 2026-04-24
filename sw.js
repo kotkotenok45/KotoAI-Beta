@@ -1,34 +1,9 @@
-const CACHE_NAME = 'kotoai-v1';
-const ASSETS = [
-  'index.html',
-  'manifest.json'
-];
-
-// Установка
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
-  );
+const CACHE_NAME = 'KotoAI-Cache';
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(CACHE_NAME).then((c) => c.addAll(['index.html', 'manifest.json'])));
 });
+self.addEventListener('fetch', (e) => {
+  e.respondWith(caches.match(e.request).then((res) => res |
 
-// Активация и удаление старого кэша
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
-      );
-    })
-  );
-});
-
-// Перехват запросов
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
+| fetch(e.request)));
 });
